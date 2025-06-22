@@ -48,7 +48,7 @@ public abstract class Element {
     public abstract void SetDirection(Cell[][] world, int x, int y, int phase);
     public abstract void UpdateElement(Cell[][] world, int x, int y, int phase);
     public abstract void AttributeChange(Cell[][] world, int x, int y);
-    public void HeatTransfer(Cell[][] world, float[][] thermal, int x, int y){
+    public void HeatTransfer(Cell[][] world, int x, int y){
         if(world[x][y].element().thermal_conductivity()<=0) return;
         float mul=10f;
 
@@ -166,6 +166,11 @@ public abstract class Element {
             case 12: return new Ice();
             case 13: return new HeatingCore();
             case 14: return new CoolingCore();
+            case 15: return new Fire();
+            case 16: return new Smoke();
+            case 17: return new Copper();
+            case 18: return new MoltenCopper();
+            case 19: return new RustedCopper();
         }
         return new VoidE();
     }

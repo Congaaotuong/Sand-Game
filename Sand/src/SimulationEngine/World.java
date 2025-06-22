@@ -5,7 +5,6 @@ import SimulationEngine.Elements.*;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class World {
     public World self = this;
@@ -16,7 +15,7 @@ public class World {
     Pair<Integer, Integer> first_point;
     Pair<Integer, Integer> second_point;
     Cell[][] world;
-    float[][] thermal;
+    static int[][] nextEl;
     public World(int Width, int Height, int Length, double Cycle){
         this.Width = Width;
         this.Height = Height;
@@ -25,12 +24,12 @@ public class World {
         this.first_point = new Pair<Integer, Integer>(-1, -1);
         this.second_point = new Pair<Integer, Integer>(-1, -1);
         this.world = new Cell[Width+2][Height+2];;
-        this.thermal = new float[Width+2][Height+2];
+        this.nextEl = new int[Width+2][Height+2];
 
         for(int x=0; x<Width+2; x++){
             for(int y=0; y<Height+2; y++){
                 this.world[x][y] = new Cell(x, y);;
-                this.thermal[x][y] = 0;
+                this.nextEl[x][y] = -1;
             }
         }
         for(int i=0; i<Width+2; i++){
@@ -209,7 +208,14 @@ public class World {
     public void UpdateWorld(){
         for(int x=1; x<=Width; x++){
             for(int y=1; y<=Height; y++){
-                world[x][y].element().HeatTransfer(world, thermal, x, y);
+                if(nextEl[x][y]==-1) continue;
+                world[x][y].changeElement(getElement(nextEl[x][y]));
+                nextEl[x][y] = -1;
+            }
+        }
+        for(int x=1; x<=Width; x++){
+            for(int y=1; y<=Height; y++){
+                world[x][y].element().HeatTransfer(world, x, y);
             }
         }
         for(int x=1; x<=Width; x++){
@@ -241,6 +247,10 @@ public class World {
         for(int x:horizontal){
             world[x][y].element().UpdateElement(world, x, y, phase);
         }
+    }
+
+    public static void UpdateNextElement(int x, int y, int element){
+        nextEl[x][y] = element;
     }
 
     private Color getColor(float g){
@@ -279,6 +289,11 @@ public class World {
             case 12: return new Ice();
             case 13: return new HeatingCore();
             case 14: return new CoolingCore();
+            case 15: return new Fire();
+            case 16: return new Smoke();
+            case 17: return new Copper();
+            case 18: return new MoltenCopper();
+            case 19: return new RustedCopper();
         }
         return new VoidE();
     }

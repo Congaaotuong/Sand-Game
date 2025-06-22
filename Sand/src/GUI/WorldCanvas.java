@@ -36,7 +36,7 @@ public class WorldCanvas extends Canvas {
         this.isMouseInScreen = false;
         this.currentGrid = world.animateGrid();
         this.buffer = new BufferedImage(Width*Length, Height*Length, BufferedImage.TYPE_INT_ARGB);
-        this.brush_size=1;
+        this.brush_size=5;
         this.brush_type=1;
         this.heatmap = false;
         this.ChosenE = LeftE;
