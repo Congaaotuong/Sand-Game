@@ -2,6 +2,9 @@ package GUI;
 
 import Sand.Main;
 
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import javax.swing.plaf.basic.BasicTableUI;
 import java.awt.*;
 import java.awt.event.*;
@@ -11,7 +14,7 @@ public class Loadout {
         Holder panel = new Holder(name);
         panel.setSize(new Dimension(width*length, height*length));
         WorldCanvas canvas = new WorldCanvas(width, height, length);
-        panel.setBackground(new Color(122, 122, 122, 255));
+        panel.setBackground(new Color(51, 51, 51, 255));
         panel.setLayout(null);
         setButton(panel, canvas);
 
@@ -39,9 +42,13 @@ public class Loadout {
         return panel;
     }
 
-    private Button getBrushButton(String name, WorldCanvas canvas, int brush, int heat,int x, int y, int width, int height){
-        Button custom = new Button(name);
+    private JButton getBrushButton(String name, WorldCanvas canvas, int brush, int heat,int x, int y, int width, int height, Color Border, Color Internal){
+        JButton custom = new JButton(name);
         custom.setBounds(x, y, width, height);
+        custom.setFont(new Font("Comic Sans MS", Font.BOLD, 11));
+        custom.setBackground(Internal);
+        custom.setForeground(Border);
+        custom.setBorder(new LineBorder(Border, 3));
         custom.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -50,9 +57,13 @@ public class Loadout {
         });
         return custom;
     }
-    private Button getButton(String name, WorldCanvas canvas, int type, int x, int y, int width, int height){
-        Button custom = new Button(name);
+    private JButton getButton(String name, WorldCanvas canvas, int type, int x, int y, int width, int height, Color Border, Color Internal){
+        JButton custom = new JButton(name);
         custom.setBounds(x, y, width, height);
+        custom.setFont(new Font("Comic Sans MS", Font.BOLD, 11));
+        custom.setBackground(Internal);
+        custom.setForeground(Border);
+        custom.setBorder(new LineBorder(Border, 3));
         if(type==0){
             custom.addActionListener(new ActionListener() {
                 @Override
@@ -105,49 +116,49 @@ public class Loadout {
     }
 
     private void setButton(Holder panel, WorldCanvas canvas){
-        Button b1 = getBrushButton("Bedrock", canvas, 1, 0, 10, 8, 150, 40);
+        JButton b1 = getBrushButton("Bedrock", canvas, 1, 0, 10, 20, 100, 40, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(b1);
-        Button b2 = getBrushButton("Sand", canvas, 2, 0, 10, 58, 150, 40);
+        JButton b2 = getBrushButton("Sand", canvas, 2, 0, 10, 70, 100, 40, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(b2);
-        Button b3 = getBrushButton("Wetsand", canvas, 3, 0, 10, 108, 150, 40);
+        JButton b3 = getBrushButton("Wetsand", canvas, 3, 0, 10, 120, 100, 40, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(b3);
-        Button b4 = getBrushButton("Clay", canvas, 4, 0, 10, 158, 150, 40);
+        JButton b4 = getBrushButton("Clay", canvas, 4, 0, 10, 170, 100, 40, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(b4);
-        Button b5 = getBrushButton("Water", canvas, 5, 0, 10, 208, 150, 40);
+        JButton b5 = getBrushButton("Water", canvas, 5, 0, 10, 220, 100, 40, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(b5);
-        Button b6 = getBrushButton("Magma", canvas, 6, 0, 10, 258, 150, 40);
+        JButton b6 = getBrushButton("Magma", canvas, 6, 0, 10, 270, 100, 40, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(b6);
-        Button b7 = getBrushButton("Diesel", canvas, 7, 0, 10, 308, 150, 40);
+        JButton b7 = getBrushButton("Diesel", canvas, 7, 0, 10, 320, 100, 40, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(b7);
-        Button b8 = getBrushButton("Steam", canvas, 8,0, 10, 358, 150, 40);
+        JButton b8 = getBrushButton("Steam", canvas, 8,0, 10, 370, 100, 40, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(b8);
-        Button b9 = getBrushButton("Terracotta", canvas, 9, 0, 10, 408, 150, 40);
+        JButton b9 = getBrushButton("Terracotta", canvas, 9, 0, 10, 420, 100, 40, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(b9);
-        Button b11 = getBrushButton("Increase Heat", canvas, 0, 1, 170, 8, 150, 40);
+        JButton b11 = getBrushButton("Increase Heat", canvas, 0, 1, 210, 20, 100, 100, Color.RED, Color.ORANGE);
         panel.add(b11);
-        Button b12 = getBrushButton("Decrease Heat", canvas, 0, -1, 170, 58, 150, 40);
+        JButton b12 = getBrushButton("Decrease Heat", canvas, 0, -1, 210, 170, 100, 100, Color.BLUE, Color.CYAN);
         panel.add(b12);
-        Button b13 = getBrushButton("Molten Glass", canvas, 10, 0, 10, 458, 150, 40);
+        JButton b13 = getBrushButton("Molten Glass", canvas, 10, 0, 10, 470, 100, 40, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(b13);
-        Button b14 = getBrushButton("Glass", canvas, 11, 0, 10, 508, 150, 40);
+        JButton b14 = getBrushButton("Glass", canvas, 11, 0, 10, 520, 100, 40, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(b14);
-        Button b15 = getBrushButton("Ice", canvas, 12, 0, 10, 558, 150, 40);
+        JButton b15 = getBrushButton("Ice", canvas, 12, 0, 10, 570, 100, 40, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(b15);
-        Button b16 = getBrushButton("Heating Core", canvas, 13, 0, 170, 108, 150, 40);
+        JButton b16 = getBrushButton("Heating Core", canvas, 13, 0, 10, 620, 100, 40, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(b16);
-        Button b17 = getBrushButton("Cooling Core", canvas, 14, 0, 170, 158, 150, 40);
+        JButton b17 = getBrushButton("Cooling Core", canvas, 14, 0, 10, 670, 100, 40, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(b17);
-        Button clear = getButton("Clear (c)", canvas, 0, 1380, 8, 150, 40);
+        JButton clear = getButton("Clear (c)", canvas, 0, 1380, 20, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(clear);
-        Button main = getButton("Main menu (m)", canvas, 1, 1380, 788, 150, 40);
+        JButton main = getButton("Main menu (m)", canvas, 1, 1380, 788, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(main);
-        Button pause = getButton("Pause (space)", canvas, 2, 1220, 8, 150, 40);
+        JButton pause = getButton("Pause (space)", canvas, 2, 1260, 20, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(pause);
-        Button circle = getButton("Circle Brush", canvas, 4, 1220, 58, 150, 40);
+        JButton circle = getButton("Circle Brush", canvas, 4, 1260, 80, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(circle);
-        Button square = getButton("Square Brush", canvas, 3, 1380, 58, 150, 40);
+        JButton square = getButton("Square Brush", canvas, 3, 1380, 80, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(square);
-        Button HeatMap = getButton("Heat Map (h)", canvas, 5, 1380, 108, 150, 40);
+        JButton HeatMap = getButton("Heat Map (h)", canvas, 5, 1380, 140, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(HeatMap);
     }
 }
