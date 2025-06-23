@@ -202,4 +202,7 @@ public class WorldCanvas extends Canvas {
         heatmap = !heatmap;
         repaint();
     }
+    public World getWorld() {
+        return this.world;
+    }
 }

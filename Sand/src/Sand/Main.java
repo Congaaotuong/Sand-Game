@@ -1,6 +1,7 @@
 package Sand;
 
 import GUI.*;
+import Database.MySQLConnection;
 
 import java.awt.*;
 

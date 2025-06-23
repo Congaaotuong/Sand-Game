@@ -49,4 +49,7 @@ public class Cell {
         this.element = new VoidE();
         this.temperature = this.element.init_temperature();
     }
+    public void changeCell(Element e) {
+        this.changeElement(e);
+    }
 }

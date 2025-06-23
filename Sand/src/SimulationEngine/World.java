@@ -4,6 +4,10 @@ import CustomDataType.*;
 import SimulationEngine.Elements.*;
 
 import java.awt.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class World {
@@ -300,4 +304,136 @@ public class World {
         }
         return new VoidE();
     }
+    // Kết nối MySQL
+    // Hàm kết nối tới MySQL
+    private static Connection conn;
+    public void connectToDB() {
+        synchronized (World.class) {  // Use class-level synchronization for static conn
+            try {
+                if (conn != null && !conn.isClosed()) {
+                    return;  // Reuse existing connection if valid
+                }
+                conn = Database.MySQLConnection.getConnection();
+                conn.setAutoCommit(true);  // Ensure consistent initial state
+                System.out.println("Connected to MySQL!");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    // Lưu trạng thái world vào MySQL
+    public void saveWorldToDB(String sand) {
+        synchronized (World.class) {  // Use class-level synchronization
+            if (conn == null) return;
+            if (!sand.matches("[a-zA-Z0-9_]+")) {
+                System.err.println("Invalid table name!");
+                return;
+            }
+
+            String deleteSQL = "DELETE FROM " + sand;
+            String insertSQL = "INSERT INTO " + sand + " (x, y, element, temperature, direction, falling, reserved) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+            Connection localConn = null;
+            try {
+                // Create a new connection for this transaction
+                localConn = Database.MySQLConnection.getConnection();
+                localConn.setAutoCommit(false);
+
+                try (PreparedStatement delStmt = localConn.prepareStatement(deleteSQL);
+                     PreparedStatement stmt = localConn.prepareStatement(insertSQL)) {
+
+                    delStmt.executeUpdate();
+
+                    int count = 0;
+                    for (int x = 1; x <= Width; x++) {
+                        for (int y = 1; y <= Height; y++) {
+                            if (world[x][y].element() instanceof SimulationEngine.Elements.VoidE) continue;
+                            stmt.setInt(1, x - 1);
+                            stmt.setInt(2, y - 1);
+                            stmt.setString(3, world[x][y].element().toString());
+
+                            float temp = world[x][y].temperature();
+                            if (Float.isNaN(temp)) {
+                                temp = 0.0f;
+                            }
+                            stmt.setFloat(4, temp);
+
+                            stmt.setInt(5, world[x][y].direction());
+                            stmt.setBoolean(6, world[x][y].isFalling());
+
+                            float reserved = world[x][y].reserved();
+                            if (Float.isNaN(reserved)) {
+                                reserved = 0.0f;
+                            }
+                            stmt.setFloat(7, reserved);
+
+                            stmt.addBatch();
+                            count++;
+                            if (count % 1000 == 0) {
+                                stmt.executeBatch();
+                            }
+                        }
+                    }
+                    stmt.executeBatch();
+                    localConn.commit();
+                    System.out.println("World saved to DB!");
+                }
+            } catch (SQLException e) {
+                try {
+                    if (localConn != null && !localConn.getAutoCommit()) {
+                        localConn.rollback();
+                    }
+                } catch (SQLException ex) {
+                    System.err.println("Error during rollback: " + ex.getMessage());
+                }
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (localConn != null) {
+                        localConn.setAutoCommit(true);
+                        localConn.close();
+                    }
+                } catch (SQLException e) {
+                    System.err.println("Error closing connection: " + e.getMessage());
+                }
+            }
+        }
+    }
+
+
+
+
+    // Load trạng thái world từ MySQL
+    public void loadWorldFromDB(String sand) {
+        if (conn == null) return;
+        try {
+            String sql = "SELECT x, y, element ,temperature , direction , falling ,reserved FROM " + sand;
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                int x = rs.getInt("x");
+                int y = rs.getInt("y");
+                String elementName = rs.getString("element");
+                float temp = rs.getFloat("temperature");
+                int dir = rs.getInt("direction");
+                boolean fall = rs.getBoolean("falling");
+                float res = rs.getFloat("reserved");
+
+                Element e = Element.fromString(elementName);
+                if (x >= 0 && x < Width && y >= 0 && y < Height && e != null) {
+                    world[x +1 ][y + 1].changeCell(e);
+                    world[x + 1 ][y +1].setTemperature(temp);
+                    world[x + 1][y + 1].changeDirection(dir);
+                    world[x + 1][y + 1].changeFalling(fall);
+                    world[x + 1][y + 1].changeReserved(res);
+                }
+            }
+            rs.close();
+            stmt.close();
+            System.out.println("World loaded from DB!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

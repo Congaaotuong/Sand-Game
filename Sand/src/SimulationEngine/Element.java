@@ -177,4 +177,42 @@ public abstract class Element {
         }
         return new VoidE();
     }
+    public static Element fromString(String name) {
+        switch (name) {
+            case "Bedrock": return new SimulationEngine.Elements.Bedrock();
+            case "VoidE": return new SimulationEngine.Elements.VoidE();
+            case "Sand": return new SimulationEngine.Elements.Sand();
+            case "Water": return new SimulationEngine.Elements.Water();
+            case "Magma": return new SimulationEngine.Elements.Magma();
+            case "Diesel": return new SimulationEngine.Elements.Diesel();
+            case "Clay": return new SimulationEngine.Elements.Clay();
+            case "Steam": return new SimulationEngine.Elements.Steam();
+            case "WetSand": return new SimulationEngine.Elements.WetSand();
+            case "CoolingCore": return new SimulationEngine.Elements.CoolingCore();
+            case "HeatingCore": return new SimulationEngine.Elements.HeatingCore();
+            case "Ice": return new SimulationEngine.Elements.Ice();
+            case "Terracotta": return new SimulationEngine.Elements.Terracotta();
+            case "MoltenGlass": return new SimulationEngine.Elements.MoltenGlass();
+            case "Glass": return new SimulationEngine.Elements.Glass();
+            case "Fire": return new SimulationEngine.Elements.Fire();
+            case "Smoke": return new SimulationEngine.Elements.Smoke();
+            case "Copper": return new SimulationEngine.Elements.Copper();
+            case "MoltenCopper": return new SimulationEngine.Elements.MoltenCopper();
+            case "RustedCopper": return new SimulationEngine.Elements.RustedCopper();
+            case "Wood": return new SimulationEngine.Elements.Wood();
+            case "BurningWood": return new SimulationEngine.Elements.BurningWood();
+            case "Ash": return new SimulationEngine.Elements.Ash();
+
+
+
+
+
+
+            default: return null;
+        }
+    }
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
