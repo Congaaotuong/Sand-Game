@@ -30,8 +30,8 @@ public class Main {
         wnd.addScene(loadout.loadout_Login("login", width, height, length), 2);
         wnd.addScene(loadout.loadout_Register("register", width, height, length), 3);
         wnd.addScene(loadout.loadout_ChangePass("changepass", width, height, length), 4);
-        wnd.addScene(loadout.loadout_Elemtl());
-
+        wnd.addScene(loadout.loadout_Setting("Setting", width, height, length), 5);
+        wnd.addScene(loadout.loadout_Setting("elenmentsList", width, height, length), 6);
 
         wnd.InitFrame();
         wnd.ChangeScene("main menu");

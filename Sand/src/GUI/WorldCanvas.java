@@ -110,6 +110,9 @@ public class WorldCanvas extends Canvas {
                 if (code == 77) {
                     Main.RequestScene("main menu");
                 }
+                if (code == 80) { // P
+                    Main.RequestScene("settings");
+                }
                 if(code == 67){
                     Clean();
                 }
@@ -122,6 +125,7 @@ public class WorldCanvas extends Canvas {
                 if(code>=96 && code<=97){
                     brush_type = code-96;
                 }
+
             }
         });
     }
@@ -184,6 +188,10 @@ public class WorldCanvas extends Canvas {
     public void Main(){
         Main.RequestScene("main menu");
     }
+    public void Setting(){
+        Main.RequestScene("Setting");
+    }
+
     public void Pause(){
         pause = !pause;
     }

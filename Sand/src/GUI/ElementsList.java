@@ -5,61 +5,47 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ElementsList {
+public class ElementsList extends JPanel {
 
-    private List<String> elementList = new ArrayList<>();
-    private JDialog infoDialog;
+    private List<String> ElementsList = new ArrayList<>();
+    private DefaultListModel<String> listModel;
 
     public ElementsList() {
-        elementList.add("Wood");
-        elementList.add("Glass");
-        elementList.add("Stone");
+        setLayout(new BorderLayout(10, 10));
+        setBackground(Color.BLACK);
+        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        JLabel titleLabel = new JLabel("Elements in Simulation", JLabel.CENTER);
+        titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
+        titleLabel.setForeground(new Color(70, 130, 180));
+        add(titleLabel, BorderLayout.NORTH);
+
+        listModel = new DefaultListModel<>();
+        listModel.addElement("Wood");
+        listModel.addElement("Glass");
+        listModel.addElement("Stone");
+
+        JList<String> list = new JList<>(listModel);
+        list.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        list.setBackground(new Color(40, 40, 40));
+        list.setForeground(Color.WHITE);
+        list.setSelectionBackground(new Color(70, 130, 180));
+        list.setSelectionForeground(Color.BLACK);
+
+        JScrollPane scrollPane = new JScrollPane(list);
+        scrollPane.setBorder(BorderFactory.createLineBorder(new Color(70, 130, 180), 4));
+        add(scrollPane, BorderLayout.CENTER);
     }
 
     public void addElement(String element) {
-        elementList.add(element);
-    }
-
-    public void showElementInfo() {
-        if (infoDialog != null && infoDialog.isShowing()) {
-            infoDialog.toFront(); // đưa dialog lên trước nếu đang mở
-            return;
-        }
-
-        infoDialog = new JDialog();
-        infoDialog.setTitle("Element List");
-        infoDialog.setSize(300, 400);
-        infoDialog.setLocationRelativeTo(null);
-        infoDialog.setLayout(new BorderLayout());
-
-        JLabel titleLabel = new JLabel("Elements in Simulation", JLabel.CENTER);
-        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        titleLabel.setForeground(Color.WHITE);
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-        DefaultListModel<String> model = new DefaultListModel<>();
-        for (String element : elementList) model.addElement("• " + element);
-
-        JList<String> list = new JList<>(model);
-        list.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        list.setBackground(new Color(30, 30, 30));
-        list.setForeground(Color.WHITE);
-        list.setSelectionBackground(new Color(60, 60, 60));
-        list.setSelectionForeground(Color.YELLOW);
-
-        JScrollPane scrollPane = new JScrollPane(list);
-        scrollPane.setBorder(BorderFactory.createEmptyBorder());
-
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBackground(Color.BLACK);
-        mainPanel.add(titleLabel, BorderLayout.NORTH);
-        mainPanel.add(scrollPane, BorderLayout.CENTER);
-
-        infoDialog.setContentPane(mainPanel);
-        infoDialog.setVisible(true);
+        listModel.addElement(element);
     }
 
     public List<String> getElementList() {
-        return elementList;
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < listModel.size(); i++) {
+            list.add(listModel.get(i));
+        }
+        return list;
     }
 }

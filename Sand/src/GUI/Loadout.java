@@ -11,30 +11,6 @@ import java.io.File;
 
 public class Loadout {
 
-    // ✅ Thêm biến thành viên
-    private Clip clip;
-    private boolean isSoundOn = true;
-    private ElementsList elementsInfo = new ElementsList();
-
-    public Loadout() {
-        // ✅ Khởi tạo âm thanh
-        try {
-            File soundFile = new File("D:\\Java\\Sand\\Sounds\\background_music.wav");
-            if (soundFile.exists()) {
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
-                clip = AudioSystem.getClip();
-                clip.open(audioInputStream);
-                clip.loop(Clip.LOOP_CONTINUOUSLY);
-            } else {
-                System.out.println("Không tìm thấy tệp âm thanh.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
 public Holder loadout_1(String name, int width, int height, int length){
         Holder panel = new Holder(name);
         panel.setSize(new Dimension(width*length, height*length));
@@ -57,7 +33,7 @@ public Holder loadout_1(String name, int width, int height, int length){
         Holder panel = new Holder(name);
         panel.setSize(new Dimension(width * length, height * length));
         panel.setLayout(new BorderLayout()); // Đảm bảo layout
-        MainMenu gameMenuPanel = new MainMenu(clip, isSoundOn, elementsInfo);
+        MainMenu gameMenuPanel = new MainMenu();
         panel.add(gameMenuPanel, BorderLayout.CENTER);
         return panel;
     }
@@ -87,6 +63,26 @@ public Holder loadout_1(String name, int width, int height, int length){
         panel.add(gameChangePassPanel, BorderLayout.CENTER);
         return panel;
     }
+    public Holder loadout_Setting(String name, int width, int height, int length) {
+        Holder panel = new Holder(name);
+        panel.setLayout(new BorderLayout());
+        panel.setPreferredSize(new Dimension(width * length, height * length));
+        Setting st=new Setting();
+        panel.add(st, BorderLayout.CENTER);
+        return panel;
+    }
+//    public Holder loadout_ElementsList(String name, int width, int height, int length) {
+//        Holder panel = new Holder(name);
+//        panel.setLayout(new BorderLayout());
+//        panel.setPreferredSize(new Dimension(width * length, height * length));
+//
+//        ElementsList elementsPanel = new ElementsList();
+//        panel.add(elementsPanel, BorderLayout.CENTER);
+//
+//        return panel;
+//    }
+
+
 
     private JButton getBrushButton(String name, WorldCanvas canvas, int brush, int heat,int x, int y, int width, int height, Color Border, Color Internal){
         JButton custom = new JButton(name);
@@ -158,10 +154,18 @@ public Holder loadout_1(String name, int width, int height, int length){
                 }
             });
         }
+        if(type==6){
+            custom.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    canvas.Setting();}
+            });
+        }
         return custom;
     }
 
     private void setButton(Holder panel, WorldCanvas canvas){
+
         JButton b1 = getBrushButton("Bedrock", canvas, 1, 0, 10, 20, 100, 40, new Color(45, 44, 44, 255), new Color(117, 96, 96, 255));
         panel.add(b1);
         JButton b2 = getBrushButton("Sand", canvas, 2, 0, 10, 70, 100, 40, new Color(189, 126, 45, 255), new Color(246, 215, 176, 255));
@@ -204,10 +208,13 @@ public Holder loadout_1(String name, int width, int height, int length){
         panel.add(b17);
         JButton b22 = getBrushButton("Rusted Copper", canvas, 19, 0, 120, 120, 100, 40, new Color(186,163,127, 255), new Color(113,212,204, 255));
         panel.add(b22);
+
+        //right
         JButton clear = getButton("Clear (c)", canvas, 0, 1430, 20, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(clear);
         JButton main = getButton("Main menu (m)", canvas, 1, 1430, 788, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(main);
+
         JButton pause = getButton("Pause (space)", canvas, 2, 1310, 20, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(pause);
         JButton circle = getButton("Circle Brush", canvas, 4, 1310, 80, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
@@ -216,5 +223,9 @@ public Holder loadout_1(String name, int width, int height, int length){
         panel.add(square);
         JButton HeatMap = getButton("Heat Map (h)", canvas, 5, 1430, 140, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(HeatMap);
+        JButton setting = getButton("Setting (p)", canvas, 6, 1320, 788, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
+        panel.add(setting);
+
+
     }
 }
