@@ -111,7 +111,7 @@ public class WorldCanvas extends Canvas {
                     Main.RequestScene("main menu");
                 }
                 if (code == 80) { // P
-                    Main.RequestScene("settings");
+                    Main.RequestScene("Setting");
                 }
                 if(code == 67){
                     Clean();
