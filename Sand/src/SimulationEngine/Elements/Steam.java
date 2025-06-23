@@ -16,7 +16,7 @@ public class Steam extends Gas {
         color = trans(colors[new Random().nextInt(3)]);
         thermal_conductivity = 0.02f;
         heat_capacity = 9.6f;
-        init_temperature = 100;
+        init_temperature = 120;
         melting_point = 1000;
         melting_latent = 0;
         freezing_point = 100;

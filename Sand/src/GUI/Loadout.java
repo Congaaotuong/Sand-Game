@@ -208,8 +208,15 @@ public Holder loadout_1(String name, int width, int height, int length){
         panel.add(b17);
         JButton b22 = getBrushButton("Rusted Copper", canvas, 19, 0, 120, 120, 100, 40, new Color(186,163,127, 255), new Color(113,212,204, 255));
         panel.add(b22);
+<<<<<<< HEAD
 
         //right
+=======
+        JButton b23 = getBrushButton("Wood", canvas, 20, 0, 120, 170, 100, 40, new Color(85,51,17, 255), new Color(204,170,102, 255));
+        panel.add(b23);
+        JButton b24 = getBrushButton("Ash", canvas, 22, 0, 120, 220, 100, 40, new Color(59, 53, 53, 255), new Color(159, 147, 147, 255));
+        panel.add(b24);
+>>>>>>> 892390d5f97e44de55ae62c2a333e1529b581b4f
         JButton clear = getButton("Clear (c)", canvas, 0, 1430, 20, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(clear);
         JButton main = getButton("Main menu (m)", canvas, 1, 1430, 788, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));

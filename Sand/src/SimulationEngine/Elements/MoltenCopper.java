@@ -15,7 +15,7 @@ public class MoltenCopper extends Liquid {
         inertia_viscosity = 8;
         thermal_conductivity = 4;
         heat_capacity = 1.84f;
-        init_temperature = 1085;
+        init_temperature = 1600;
         melting_point = 10000;
         melting_latent = 0;
         freezing_point = 1085;
