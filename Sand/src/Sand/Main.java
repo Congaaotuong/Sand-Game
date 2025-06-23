@@ -24,11 +24,17 @@ public class Main {
         }).start();
     }
     static void Start(){
+
         wnd.addScene(loadout.loadout_1("world", width, height, length), 0);
-        wnd.addScene(loadout.loadout_2("main menu"), 1);
+        wnd.addScene(loadout.loadout_HomeGame("main menu",width,height,length), 1);
+        wnd.addScene(loadout.loadout_Login("login", width, height, length), 2);
+        wnd.addScene(loadout.loadout_Register("register", width, height, length), 3);
+        wnd.addScene(loadout.loadout_ChangePass("changepass", width, height, length), 4);
+        wnd.addScene(loadout.loadout_Elemtl());
+
 
         wnd.InitFrame();
-        wnd.ChangeScene("world");
+        wnd.ChangeScene("main menu");
     }
 
     static void Update(){

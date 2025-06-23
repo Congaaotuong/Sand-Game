@@ -1,16 +1,41 @@
 package GUI;
 
-import Sand.Main;
-
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-import javax.swing.plaf.basic.BasicTableUI;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 
 public class Loadout {
-    public Holder loadout_1(String name, int width, int height, int length){
+
+    // ✅ Thêm biến thành viên
+    private Clip clip;
+    private boolean isSoundOn = true;
+    private ElementsList elementsInfo = new ElementsList();
+
+    public Loadout() {
+        // ✅ Khởi tạo âm thanh
+        try {
+            File soundFile = new File("D:\\Java\\Sand\\Sounds\\background_music.wav");
+            if (soundFile.exists()) {
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+                clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+            } else {
+                System.out.println("Không tìm thấy tệp âm thanh.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+public Holder loadout_1(String name, int width, int height, int length){
         Holder panel = new Holder(name);
         panel.setSize(new Dimension(width*length, height*length));
         WorldCanvas canvas = new WorldCanvas(width, height, length);
@@ -28,17 +53,38 @@ public class Loadout {
         });
         return panel;
     }
-    public Holder loadout_2(String name){
+    public Holder loadout_HomeGame(String name, int width, int height, int length) {
         Holder panel = new Holder(name);
-        panel.setBackground(Color.BLUE);
-        Button button = new Button("change scene");
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Main.RequestScene("world");
-            }
-        });
-        panel.add(button);
+        panel.setSize(new Dimension(width * length, height * length));
+        panel.setLayout(new BorderLayout()); // Đảm bảo layout
+        MainMenu gameMenuPanel = new MainMenu(clip, isSoundOn, elementsInfo);
+        panel.add(gameMenuPanel, BorderLayout.CENTER);
+        return panel;
+    }
+    public Holder loadout_Login(String name, int width, int height, int length) {
+        Holder panel = new Holder(name);
+        panel.setLayout(new BorderLayout());
+        panel.setPreferredSize(new Dimension(width * length, height * length));
+
+        Login gameLoginPanel = new Login(); // Login không cần tham số
+        panel.add(gameLoginPanel, BorderLayout.CENTER);
+
+        return panel;
+    }
+    public Holder loadout_Register(String name, int width, int height, int length) {
+        Holder panel = new Holder(name);
+        panel.setLayout(new BorderLayout());
+        panel.setPreferredSize(new Dimension(width * length, height * length));
+        Register gameRegisterPanel=new Register();
+        panel.add(gameRegisterPanel, BorderLayout.CENTER);
+        return panel;
+    }
+    public Holder loadout_ChangePass(String name, int width, int height, int length) {
+        Holder panel = new Holder(name);
+        panel.setLayout(new BorderLayout());
+        panel.setPreferredSize(new Dimension(width * length, height * length));
+        ChangePass gameChangePassPanel = new ChangePass();
+        panel.add(gameChangePassPanel, BorderLayout.CENTER);
         return panel;
     }
 
