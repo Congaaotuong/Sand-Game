@@ -2,6 +2,7 @@ package SimulationEngine.SubElements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.Element;
+
 import java.util.Random;
 
 public abstract class Solid extends Element {
@@ -42,21 +43,14 @@ public abstract class Solid extends Element {
     }
 
     private void Turn(Cell[][] world, int x, int y){
-        int width = world.length;
-        int height = world[0].length;
-    
-        for(int i = x - 1; i <= x + 1; i++){
-            for(int j = y - 1; j <= y + 1; j++){
-                // Kiểm tra i, j có nằm trong giới hạn không
-                if (i < 0 || i >= width || j < 0 || j >= height) continue;
-    
-                if(world[i][j].element().isStatic() || (i == x && j == y)) continue;
+        for(int i=x-1; i<=x+1; i++){
+            for(int j=y-1; j<=y+1; j++){
+                if(world[i][j].element().isStatic() || (i==x && j==y)) continue;
                 if(!CalPercentage(world[i][j].element().inertia_viscosity())) continue;
                 world[i][j].changeFalling(true);
             }
         }
     }
-    
     private int getDirection(int l, int r, int d, int ld, int rd){
         if(d>0) return 1;
         int dir=15;

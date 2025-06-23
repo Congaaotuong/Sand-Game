@@ -2,7 +2,6 @@ package SimulationEngine.Elements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.Solid;
-
 import java.util.Random;
 
 public class HeatingCore extends Solid {

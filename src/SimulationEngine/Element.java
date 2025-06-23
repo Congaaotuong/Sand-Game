@@ -47,7 +47,7 @@ public abstract class Element {
     public abstract void SetDirection(Cell[][] world, int x, int y, int phase);
     public abstract void UpdateElement(Cell[][] world, int x, int y, int phase);
     public abstract void AttributeChange(Cell[][] world, int x, int y);
-    public void HeatTransfer(Cell[][] world, float[][] thermal, int x, int y){
+    public void HeatTransfer(Cell[][] world, int x, int y){
         if(world[x][y].element().thermal_conductivity()<=0) return;
         float mul=10f;
 
@@ -165,10 +165,17 @@ public abstract class Element {
             case 12: return new Ice();
             case 13: return new HeatingCore();
             case 14: return new CoolingCore();
+            case 15: return new Fire();
+            case 16: return new Smoke();
+            case 17: return new Copper();
+            case 18: return new MoltenCopper();
+            case 19: return new RustedCopper();
+            case 20: return new Wood();
+            case 21: return new BurningWood();
+            case 22: return new Ash();
         }
         return new VoidE();
     }
-
     public static Element fromString(String name) {
         switch (name) {
             case "Bedrock": return new SimulationEngine.Elements.Bedrock();
@@ -186,6 +193,17 @@ public abstract class Element {
             case "Terracotta": return new SimulationEngine.Elements.Terracotta();
             case "MoltenGlass": return new SimulationEngine.Elements.MoltenGlass();
             case "Glass": return new SimulationEngine.Elements.Glass();
+            case "Fire": return new SimulationEngine.Elements.Fire();
+            case "Smoke": return new SimulationEngine.Elements.Smoke();
+            case "Copper": return new SimulationEngine.Elements.Copper();
+            case "MoltenCopper": return new SimulationEngine.Elements.MoltenCopper();
+            case "RustedCopper": return new SimulationEngine.Elements.RustedCopper();
+            case "Wood": return new SimulationEngine.Elements.Wood();
+            case "BurningWood": return new SimulationEngine.Elements.BurningWood();
+            case "Ash": return new SimulationEngine.Elements.Ash();
+        
+        
+            
         
             
     
@@ -196,5 +214,4 @@ public abstract class Element {
     public String toString() {
         return this.name;
     }
-
 }

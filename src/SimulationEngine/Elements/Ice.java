@@ -16,7 +16,7 @@ public class Ice extends Solid {
         inertia_viscosity = 0;
         thermal_conductivity = 2.2f;
         heat_capacity = 10f;
-        init_temperature = -1;
+        init_temperature = -25;
         melting_point = 0;
         melting_latent = 6.7f;
         freezing_point = -250;
