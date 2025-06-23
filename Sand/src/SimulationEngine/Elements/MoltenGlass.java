@@ -15,7 +15,7 @@ public class MoltenGlass extends Liquid {
         inertia_viscosity = 10;
         thermal_conductivity = 5.5f;
         heat_capacity = 4.3f;
-        init_temperature = 1120;
+        init_temperature = 1500;
         melting_point = 2000;
         melting_latent = 0;
         freezing_point = 1000;

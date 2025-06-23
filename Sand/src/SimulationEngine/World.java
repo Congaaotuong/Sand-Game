@@ -294,6 +294,9 @@ public class World {
             case 17: return new Copper();
             case 18: return new MoltenCopper();
             case 19: return new RustedCopper();
+            case 20: return new Wood();
+            case 21: return new BurningWood();
+            case 22: return new Ash();
         }
         return new VoidE();
     }

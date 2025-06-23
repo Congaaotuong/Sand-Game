@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class Copper extends Solid {
     long[] colors = {0xbb785bff, 0xbf816aff, 0xa96148ff, 0xb27862ff, 0xbe7a57ff};
-    int rusty=0;
+    int oxidize =0;
     public Copper(){
         e_id = 17;
         name = "Copper";
@@ -28,16 +28,15 @@ public class Copper extends Solid {
 
     @Override
     public void AttributeChange(Cell[][] world, int x, int y) {
-        if(rusty>=200) {
+        if(oxidize >=200) {
             if(new Random().nextInt(10)!=2) return;
             world[x][y].changeElementS(new RustedCopper());
         }
         if(world[x-1][y].element().id()==5 || world[x+1][y].element().id()==5 || world[x][y-1].element().id()==5 || world[x][y+1].element().id()==5){
-            rusty+=2;
+            if(new Random().nextInt(2)==0) oxidize++;
         }
         if(world[x-1][y].element().type()>0 || world[x+1][y].element().type()>0 || world[x][y-1].element().type()>0 || world[x][y+1].element().type()>0){
-            rusty++;
+            if(new Random().nextInt(4)==2) oxidize++;
         }
-        if(new Random().nextInt(4)==2) rusty++;
     }
 }

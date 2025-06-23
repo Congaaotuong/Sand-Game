@@ -177,6 +177,8 @@ public class WorldCanvas extends Canvas {
     public void Clean(){
         world.cleanScreen();
         repaint();
+        world.cleanScreen();
+        repaint();
     }
     public void BrushType(int x){
         brush_type=x;
