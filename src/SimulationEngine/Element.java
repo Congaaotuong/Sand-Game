@@ -2,8 +2,9 @@ package SimulationEngine;
 
 import SimulationEngine.Elements.*;
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Random;
-public abstract class Element {
+public abstract class Element  implements Serializable {
     protected int e_id;
     protected String name;
     protected int type;

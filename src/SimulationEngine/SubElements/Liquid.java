@@ -5,8 +5,9 @@ import SimulationEngine.Element;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.io.Serializable;
 
-public abstract class Liquid extends Element {
+public abstract class Liquid extends Element  implements Serializable {
     public Liquid(){
         type = 1;
         static_object=false;

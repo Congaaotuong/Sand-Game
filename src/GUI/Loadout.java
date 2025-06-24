@@ -8,7 +8,11 @@ import javax.swing.border.LineBorder;
 import javax.swing.plaf.basic.BasicTableUI;
 import java.awt.*;
 import java.awt.event.*;
-
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import SimulationEngine.World;
 public class Loadout {
     public Holder loadout_1(String name, int width, int height, int length){
         Holder panel = new Holder(name);
@@ -26,12 +30,12 @@ public class Loadout {
                 canvas.SetMiddle(panel.getWidth(), panel.getHeight());
             }
         });
-        // Nút Lưu
+       // Nút Lưu
 Button saveBtn = new Button("Save");
-saveBtn.setBounds(1260, 200, 200, 40); // Vị trí và kích thước
-saveBtn.setBackground(new Color(46, 204, 113)); // Xanh lá cây
-saveBtn.setForeground(Color.BLACK);
-saveBtn.setFont(new Font("Arial", Font.BOLD, 14));
+saveBtn.setBounds(1310, 140, 100, 50); // giống Heat Map
+saveBtn.setBackground(new Color(51, 51, 51, 255));
+saveBtn.setForeground(Color.WHITE);
+saveBtn.setFont(new Font("Comic Sans MS", Font.BOLD, 11));
 saveBtn.addActionListener(e -> {
     new Thread(() -> {
         canvas.getWorld().connectToDB();
@@ -41,12 +45,13 @@ saveBtn.addActionListener(e -> {
 });
 panel.add(saveBtn);
 
+
 // Nút Tải
 Button loadBtn = new Button("Load");
-loadBtn.setBounds(1260, 250, 200, 40); // Ngay dưới nút lưu
-loadBtn.setBackground(new Color(241, 196, 15)); // Vàng cam
-loadBtn.setForeground(Color.BLACK);
-loadBtn.setFont(new Font("Arial", Font.BOLD, 14));
+loadBtn.setBounds(1430, 200, 100, 50); // đặt cạnh Save hoặc vị trí bạn muốn
+loadBtn.setBackground(new Color(51, 51, 51, 255));
+loadBtn.setForeground(Color.WHITE);
+loadBtn.setFont(new Font("Comic Sans MS", Font.BOLD, 11));
 loadBtn.addActionListener(e -> {
     new Thread(() -> {
         canvas.getWorld().connectToDB();
@@ -56,6 +61,44 @@ loadBtn.addActionListener(e -> {
     }).start();
 });
 panel.add(loadBtn);
+
+// Nút Save to
+Button saveToBtn = new Button("Save to");
+saveToBtn.setBounds(1310, 200, 100, 50);
+saveToBtn.setBackground(new Color(51, 51, 51, 255));
+saveToBtn.setForeground(Color.WHITE);
+saveToBtn.setFont(new Font("Comic Sans MS", Font.BOLD, 11));
+saveToBtn.addActionListener(e -> {
+    SaveLoadOverlayPanel savePanel = new SaveLoadOverlayPanel(panel, canvas, true, null);
+    panel.add(savePanel, 0);
+    panel.repaint();
+    panel.revalidate();
+});
+panel.add(saveToBtn);
+
+// Nút Load to
+Button loadToBtn = new Button("Load to");
+loadToBtn.setBounds(1430, 260, 100, 50);
+loadToBtn.setBackground(new Color(51, 51, 51, 255));
+loadToBtn.setForeground(Color.WHITE);
+loadToBtn.setFont(new Font("Comic Sans MS", Font.BOLD, 11));
+loadToBtn.addActionListener(e -> {
+    final SaveLoadOverlayPanel[] loadPanel = new SaveLoadOverlayPanel[1];
+    loadPanel[0] = new SaveLoadOverlayPanel(panel, canvas, false, loadedWorld -> {
+        canvas.world = loadedWorld;
+        canvas.currentGrid = null; // Đảm bảo BufferDraw vẽ lại toàn bộ
+canvas.BufferDraw(canvas.world.animateGrid());
+canvas.repaint();
+panel.remove(loadPanel[0]);
+panel.repaint();
+panel.revalidate();
+    });
+    panel.add(loadPanel[0], 0);
+    panel.repaint();
+    panel.revalidate();
+});
+panel.add(loadToBtn);
+
         return panel;
     }
     public Holder loadout_2(String name){

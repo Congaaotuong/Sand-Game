@@ -2,10 +2,11 @@ package SimulationEngine.Elements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.Gas;
-
+import java.io.Serializable;
 import java.util.Random;
 
-public class Steam extends Gas {
+
+public class Steam extends Gas implements Serializable {
     long[] colors = {0xe2e4e1ff, 0xd2dbdcff, 0xc9d0d1ff};
     public Steam(){
         e_id = 8;

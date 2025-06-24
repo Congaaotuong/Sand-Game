@@ -2,10 +2,11 @@ package SimulationEngine.Elements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.Solid;
-
+import java.io.Serializable;
 import java.util.Random;
 
-public class Glass extends Solid {
+
+public class Glass extends Solid  implements Serializable {
     long[] colors = {0xdbe1e3ff, 0xc0cbcdff, 0xd8e4e9ff,0xdbe1e3ff, 0xc0cbcdff, 0xd8e4e9ff, 0xa7c7cbff};
     public Glass(){
         e_id = 11;

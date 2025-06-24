@@ -2,9 +2,11 @@ package SimulationEngine.Elements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.Solid;
+import java.io.Serializable;
 import java.util.Random;
 
-public class WetSand extends Solid {
+
+public class WetSand extends Solid  implements Serializable {
     long[] colors = {0x986e52ff, 0xb68967ff, 0x946338ff};
     public WetSand(){
         e_id = 3;

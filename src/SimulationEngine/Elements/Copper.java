@@ -2,10 +2,11 @@ package SimulationEngine.Elements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.Solid;
-
+import java.io.Serializable;
 import java.util.Random;
 
-public class Copper extends Solid {
+
+public class Copper extends Solid  implements Serializable {
     long[] colors = {0xbb785bff, 0xbf816aff, 0xa96148ff, 0xb27862ff, 0xbe7a57ff};
     int oxidize =0;
     public Copper(){

@@ -4,13 +4,15 @@ import CustomDataType.*;
 import SimulationEngine.Elements.*;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class World {
+public class World implements Serializable {
     public World self = this;
     int Width;
     int Height;

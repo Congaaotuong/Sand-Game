@@ -1,7 +1,8 @@
 package SimulationEngine;
 
 import SimulationEngine.Elements.*;
-public class Cell {
+import java.io.Serializable;
+public class Cell implements Serializable {
     int x_pos;
     int y_pos;
     int direction;

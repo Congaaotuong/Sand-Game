@@ -2,10 +2,11 @@ package SimulationEngine.Elements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.Gas;
-
+import java.io.Serializable;
 import java.util.Random;
 
-public class Smoke extends Gas {
+
+public class Smoke extends Gas  implements Serializable {
     long[] colors = {0x7e7e7eff, 0x474747ff, 0x1a1a1aff, 0x474747ff, 0x1a1a1aff};
     int step = 0;
     public Smoke(){

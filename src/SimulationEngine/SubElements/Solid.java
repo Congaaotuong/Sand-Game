@@ -2,10 +2,10 @@ package SimulationEngine.SubElements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.Element;
-
+import java.io.Serializable;
 import java.util.Random;
 
-public abstract class Solid extends Element {
+public abstract class Solid extends Element  implements Serializable {
     public Solid(){
         type = 0;
     }

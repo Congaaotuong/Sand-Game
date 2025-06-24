@@ -2,10 +2,11 @@ package SimulationEngine.Elements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.Liquid;
-
+import java.io.Serializable;
 import java.util.Random;
 
-public class Water extends Liquid {
+
+public class Water extends Liquid  implements Serializable {
     long[] colors = {0x0070ffff, 0x1588ffff, 0x0097ffff};
     public Water(){
         e_id = 5;

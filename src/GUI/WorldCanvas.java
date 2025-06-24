@@ -9,8 +9,9 @@ import SimulationEngine.World;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
-public class WorldCanvas extends Canvas {
+public class WorldCanvas extends Canvas  implements Serializable {
     WorldCanvas self = this;
     public World world;
     int Width, Height, Length;
@@ -137,16 +138,29 @@ public class WorldCanvas extends Canvas {
         paint(g);
     }
 
-    private void BufferDraw(Color grid[][]){
+    public void BufferDraw(Color grid[][]){
         Graphics g = buffer.createGraphics();
-        for(int x=0; x<Width; x++){
-            for(int y=0; y<Height; y++){
-                if(grid[x][y]==currentGrid[x][y]) continue;
-                g.setColor(grid[x][y]);
-                g.fillRect(x*Length, y*Length, Length, Length);
+        if (currentGrid == null) {
+            for(int x=0; x<Width; x++){
+                for(int y=0; y<Height; y++){
+                    g.setColor(grid[x][y]);
+                    g.fillRect(x*Length, y*Length, Length, Length);
+                }
+            }
+        } else {
+            for(int x=0; x<Width; x++){
+                for(int y=0; y<Height; y++){
+                    if(grid[x][y]==currentGrid[x][y]) continue;
+                    g.setColor(grid[x][y]);
+                    g.fillRect(x*Length, y*Length, Length, Length);
+                }
             }
         }
-        currentGrid = grid;
+        // Luôn clone lại currentGrid để đồng bộ với grid mới
+        currentGrid = new Color[Width][Height];
+        for(int x=0; x<Width; x++)
+            for(int y=0; y<Height; y++)
+                currentGrid[x][y] = grid[x][y];
     }
     private void createBuffer() {
         int w = getWidth(), h = getHeight();

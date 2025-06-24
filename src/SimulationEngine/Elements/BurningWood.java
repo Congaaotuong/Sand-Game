@@ -3,9 +3,10 @@ package SimulationEngine.Elements;
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.Solid;
 import SimulationEngine.World;
+import java.io.Serializable;
 import java.util.Random;
 
-public class BurningWood extends Solid {
+public class BurningWood extends Solid implements Serializable {
     long[] colors = {0xffbf00ff, 0xffa500ff, 0xff8000ff, 0xff4000ff, 0xff1500ff};
     int burned=0;
     public BurningWood(){

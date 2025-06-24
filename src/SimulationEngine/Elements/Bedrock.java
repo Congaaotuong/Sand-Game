@@ -2,10 +2,10 @@ package SimulationEngine.Elements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.*;
-
+import java.io.Serializable;
 import java.util.Random;
 
-public class Bedrock extends Solid {
+public class Bedrock extends Solid implements Serializable {
     long[] colors = {0x2d2c2cff, 0x3a3232ff, 0x493c3cff, 0x5c4949ff, 0x655353ff};
     public Bedrock(){
         e_id = 1;

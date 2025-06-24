@@ -2,10 +2,10 @@ package SimulationEngine.Elements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.Solid;
-
+import java.io.Serializable;
 import java.util.Random;
 
-public class Ash extends Solid {
+public class Ash extends Solid implements Serializable {
     long[] colors = {0xd0c6c6ff, 0xc3b9b9ff, 0xb4a8a8ff, 0xa99d9dff, 0x9f9393ff};
     public Ash(){
         e_id = 22;

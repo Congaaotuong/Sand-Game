@@ -1,6 +1,8 @@
 package CustomDataType;
 
-public class Pair <F, S>{
+import java.io.Serializable;
+
+public class Pair <F, S> implements Serializable{
     F first;
     S second;
     public Pair(F first, S second){

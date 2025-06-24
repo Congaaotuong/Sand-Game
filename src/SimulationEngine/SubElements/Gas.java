@@ -5,8 +5,9 @@ import SimulationEngine.Element;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.io.Serializable;
 
-public abstract class Gas extends Element {
+public abstract class Gas extends Element  implements Serializable {
     public Gas(){
         type = 2;
         inertia_viscosity = 0;

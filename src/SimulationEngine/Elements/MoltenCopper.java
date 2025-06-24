@@ -2,9 +2,11 @@ package SimulationEngine.Elements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.Liquid;
+import java.io.Serializable;
 import java.util.Random;
 
-public class MoltenCopper extends Liquid {
+
+public class MoltenCopper extends Liquid  implements Serializable {
     long[] colors = {0xffc100ff, 0xffce00ff, 0xffdb00ff, 0xff8100ff};
     public MoltenCopper(){
         e_id = 18;

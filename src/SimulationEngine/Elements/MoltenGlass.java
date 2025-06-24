@@ -2,9 +2,11 @@ package SimulationEngine.Elements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.Liquid;
+import java.io.Serializable;
 import java.util.Random;
 
-public class MoltenGlass extends Liquid {
+
+public class MoltenGlass extends Liquid implements Serializable {
     long[] colors = {0xf2f217ff, 0xecd638ff, 0xff6600ff, 0xff2500ff};
     public MoltenGlass(){
         e_id = 10;

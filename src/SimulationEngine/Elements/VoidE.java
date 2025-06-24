@@ -2,8 +2,10 @@ package SimulationEngine.Elements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.Element;
+import java.io.Serializable;
 
-public class VoidE extends Element {
+
+public class VoidE extends Element  implements Serializable {
     public VoidE(){
         e_id = 0;
         name = "Void";

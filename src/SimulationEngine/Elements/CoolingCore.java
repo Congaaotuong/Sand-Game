@@ -2,9 +2,11 @@ package SimulationEngine.Elements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.Solid;
+import java.io.Serializable;
 import java.util.Random;
 
-public class CoolingCore extends Solid {
+
+public class CoolingCore extends Solid  implements Serializable {
     long[] colors = {0xf1efffff, 0xbfb6ffff, 0x9687ffff, 0x6954ffff, 0x391effff};
     public CoolingCore(){
         e_id = 14;

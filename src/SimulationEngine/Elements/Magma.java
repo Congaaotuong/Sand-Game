@@ -2,10 +2,11 @@ package SimulationEngine.Elements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.Liquid;
-
+import java.io.Serializable;
 import java.util.Random;
 
-public class Magma extends Liquid {
+
+public class Magma extends Liquid  implements Serializable {
     long[] colors = {0xffdb00ff, 0xffa904ff, 0xa12424ff, 0xee7b06ff, 0xffdb00ff, 0x400b0bff, 0xffa904ff, 0xee7b06ff};
     public Magma(){
         e_id = 6;

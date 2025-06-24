@@ -2,11 +2,11 @@ package SimulationEngine.Elements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.Solid;
-import SimulationEngine.World;
-
+import java.io.Serializable;
 import java.util.Random;
 
-public class Wood extends Solid {
+
+public class Wood extends Solid  implements Serializable {
     long[] colors = {0x553311ff, 0x664433ff,  0x332211ff, 0x996633ff, 0xccaa66ff};
     public Wood(){
         e_id = 20;

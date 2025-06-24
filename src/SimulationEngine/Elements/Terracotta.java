@@ -2,10 +2,11 @@ package SimulationEngine.Elements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.Solid;
-
+import java.io.Serializable;
 import java.util.Random;
 
-public class Terracotta extends Solid {
+
+public class Terracotta extends Solid  implements Serializable {
     long[] colors = {0xf47d5fff, 0xc34b36ff, 0xa73c2fff, 0x8d2828ff, 0x761f1fff, 0xa73c2fff, 0x8d2828ff, 0x761f1fff};
     public Terracotta(){
         e_id = 9;

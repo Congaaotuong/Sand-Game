@@ -2,10 +2,11 @@ package SimulationEngine.Elements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.Solid;
-
+import java.io.Serializable;
 import java.util.Random;
 
-public class Sand extends Solid {
+
+public class Sand extends Solid  implements Serializable {
     long[] colors = {0xf6d7b0ff, 0xeccca2ff, 0xe1bf92ff};
     public Sand(){
         e_id = 2;

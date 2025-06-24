@@ -2,10 +2,10 @@ package SimulationEngine.Elements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.Solid;
-
+import java.io.Serializable;
 import java.util.Random;
 
-public class Clay extends Solid {
+public class Clay extends Solid  implements Serializable {
     long[] colors = {0xc29689ff, 0x9d604dff, 0x88503eff};
     public Clay(){
         e_id = 4;

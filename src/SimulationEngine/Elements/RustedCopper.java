@@ -2,9 +2,11 @@ package SimulationEngine.Elements;
 
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.Solid;
+import java.io.Serializable;
 import java.util.Random;
 
-public class RustedCopper extends Solid {
+
+public class RustedCopper extends Solid  implements Serializable {
     long[] colors = {0xbaa37fff, 0xa1baa1ff, 0x71d4ccff, 0x7fe7ceff};
     public RustedCopper(){
         e_id = 19;

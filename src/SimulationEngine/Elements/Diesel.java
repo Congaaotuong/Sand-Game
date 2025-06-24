@@ -3,10 +3,11 @@ package SimulationEngine.Elements;
 import SimulationEngine.Cell;
 import SimulationEngine.SubElements.Liquid;
 import SimulationEngine.World;
-
+import java.io.Serializable;
 import java.util.Random;
 
-public class Diesel extends Liquid {
+
+public class Diesel extends Liquid implements Serializable {
     long[] colors = {0xf76381ff, 0xfa708cff, 0xf07890ff};
     public Diesel(){
         e_id = 7;
