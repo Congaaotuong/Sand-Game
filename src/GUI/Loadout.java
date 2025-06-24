@@ -31,11 +31,12 @@ public class Loadout {
             }
         });
        // Nút Lưu
-Button saveBtn = new Button("Save");
+JButton saveBtn = new JButton("Save");
 saveBtn.setBounds(1310, 140, 100, 50); // giống Heat Map
 saveBtn.setBackground(new Color(51, 51, 51, 255));
 saveBtn.setForeground(Color.WHITE);
 saveBtn.setFont(new Font("Comic Sans MS", Font.BOLD, 11));
+saveBtn.setBorder(new LineBorder(Color.WHITE, 3));
 saveBtn.addActionListener(e -> {
     new Thread(() -> {
         canvas.getWorld().connectToDB();
@@ -47,11 +48,12 @@ panel.add(saveBtn);
 
 
 // Nút Tải
-Button loadBtn = new Button("Load");
+JButton loadBtn = new JButton("Load");
 loadBtn.setBounds(1430, 200, 100, 50); // đặt cạnh Save hoặc vị trí bạn muốn
 loadBtn.setBackground(new Color(51, 51, 51, 255));
 loadBtn.setForeground(Color.WHITE);
 loadBtn.setFont(new Font("Comic Sans MS", Font.BOLD, 11));
+loadBtn.setBorder(new LineBorder(Color.WHITE, 3));
 loadBtn.addActionListener(e -> {
     new Thread(() -> {
         canvas.getWorld().connectToDB();
@@ -63,11 +65,12 @@ loadBtn.addActionListener(e -> {
 panel.add(loadBtn);
 
 // Nút Save to
-Button saveToBtn = new Button("Save to");
+JButton saveToBtn = new JButton("Save to");
 saveToBtn.setBounds(1310, 200, 100, 50);
 saveToBtn.setBackground(new Color(51, 51, 51, 255));
 saveToBtn.setForeground(Color.WHITE);
 saveToBtn.setFont(new Font("Comic Sans MS", Font.BOLD, 11));
+saveToBtn.setBorder(new LineBorder(Color.WHITE, 3));
 saveToBtn.addActionListener(e -> {
     SaveLoadOverlayPanel savePanel = new SaveLoadOverlayPanel(panel, canvas, true, null);
     panel.add(savePanel, 0);
@@ -77,11 +80,12 @@ saveToBtn.addActionListener(e -> {
 panel.add(saveToBtn);
 
 // Nút Load to
-Button loadToBtn = new Button("Load to");
+JButton loadToBtn = new JButton("Load to");
 loadToBtn.setBounds(1430, 260, 100, 50);
 loadToBtn.setBackground(new Color(51, 51, 51, 255));
 loadToBtn.setForeground(Color.WHITE);
 loadToBtn.setFont(new Font("Comic Sans MS", Font.BOLD, 11));
+loadToBtn.setBorder(new LineBorder(Color.WHITE, 3));
 loadToBtn.addActionListener(e -> {
     final SaveLoadOverlayPanel[] loadPanel = new SaveLoadOverlayPanel[1];
     loadPanel[0] = new SaveLoadOverlayPanel(panel, canvas, false, loadedWorld -> {
