@@ -15,7 +15,7 @@ public class CoolingCore extends Solid {
         color = trans(colors[new Random().nextInt(5)]);
         inertia_viscosity = 0;
         thermal_conductivity = 4;
-        heat_capacity = 3.8f;
+        heat_capacity = 38f;
         init_temperature = -250;
         melting_point = 500;
         melting_latent = 0;

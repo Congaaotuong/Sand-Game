@@ -32,7 +32,7 @@ public class BurningWood extends Solid {
         Random random =new Random();
         world[x][y].setTemperature(init_temperature);
         color = trans(colors[new Random().nextInt(5)]);
-        if(burned>=200){
+        if(burned>=150){
             if(random.nextInt(4)!=2) return;
             world[x][y].changeElementS(new Ash());
         }

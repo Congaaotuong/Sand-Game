@@ -3,9 +3,7 @@ package GUI;
 import Sand.Main;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-import javax.swing.plaf.basic.BasicTableUI;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -134,9 +132,9 @@ public class Loadout {
         panel.add(b8);
         JButton b9 = getBrushButton("Terracotta", canvas, 9, 0, 10, 420, 100, 40, new Color(118, 31, 31, 255), new Color(244, 125, 95, 255));
         panel.add(b9);
-        JButton b11 = getBrushButton("Increase Heat", canvas, 0, 1, 250, 20, 100, 100, Color.RED, Color.ORANGE);
+        JButton b11 = getBrushButton("Increase Heat", canvas, -1, 1, 250, 20, 100, 100, Color.RED, Color.ORANGE);
         panel.add(b11);
-        JButton b12 = getBrushButton("Decrease Heat", canvas, 0, -1, 250, 170, 100, 100, Color.BLUE, Color.CYAN);
+        JButton b12 = getBrushButton("Decrease Heat", canvas, -1, -1, 250, 170, 100, 100, Color.BLUE, Color.CYAN);
         panel.add(b12);
         JButton b13 = getBrushButton("Molten Glass", canvas, 10, 0, 10, 470, 100, 40, new Color(255, 102, 0, 255), new Color(242, 242, 23, 255));
         panel.add(b13);
@@ -168,11 +166,13 @@ public class Loadout {
         panel.add(main);
         JButton pause = getButton("Pause (space)", canvas, 2, 1310, 20, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(pause);
-        JButton circle = getButton("Circle Brush", canvas, 4, 1310, 80, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
+        canvas.SetPauseButton(pause);
+        JButton circle = getButton("Circle Brush (1)", canvas, 4, 1310, 80, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(circle);
-        JButton square = getButton("Square Brush", canvas, 3, 1430, 80, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
+        JButton square = getButton("Square Brush (2)", canvas, 3, 1430, 80, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(square);
         JButton HeatMap = getButton("Heat Map (h)", canvas, 5, 1430, 140, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(HeatMap);
+        canvas.SetHeatButton(HeatMap);
     }
 }

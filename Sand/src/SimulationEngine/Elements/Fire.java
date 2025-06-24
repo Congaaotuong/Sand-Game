@@ -12,13 +12,13 @@ public class Fire extends Gas {
         e_id = 15;
         name = "Fire";
         type = 3;
-        density = 0.1f;
+        density = 1f;
         inertia_viscosity = 0;
         color = trans(colors[new Random().nextInt(5)]);
         thermal_conductivity = 1f;
-        heat_capacity = 0.1f;
+        heat_capacity = 1000f;
         init_temperature = 1200;
-        melting_point = 10000;
+        melting_point = 1000;
         melting_latent = 0;
         freezing_point = 100;
         freezing_latent = 0;

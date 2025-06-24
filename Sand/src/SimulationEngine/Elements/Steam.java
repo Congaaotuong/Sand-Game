@@ -11,7 +11,7 @@ public class Steam extends Gas {
         e_id = 8;
         name = "Steam";
         type = 3;
-        density = 0.1f;
+        density = 10f;
         inertia_viscosity = 0;
         color = trans(colors[new Random().nextInt(3)]);
         thermal_conductivity = 0.02f;

@@ -12,7 +12,7 @@ public class Smoke extends Gas {
         e_id = 16;
         name = "Smoke";
         type = 3;
-        density = 0.1f;
+        density = 10f;
         inertia_viscosity = 0;
         color = trans(colors[new Random().nextInt(5)]);
         thermal_conductivity = 1f;

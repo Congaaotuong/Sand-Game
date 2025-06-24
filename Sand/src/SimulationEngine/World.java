@@ -1,6 +1,7 @@
 package SimulationEngine;
 
 import CustomDataType.*;
+import GUI.WorldCanvas;
 import SimulationEngine.Elements.*;
 
 import java.awt.*;
@@ -23,7 +24,7 @@ public class World {
         this.Cycle = Cycle;
         this.first_point = new Pair<Integer, Integer>(-1, -1);
         this.second_point = new Pair<Integer, Integer>(-1, -1);
-        this.world = new Cell[Width+2][Height+2];;
+        this.world = new Cell[Width+2][Height+2];
         this.nextEl = new int[Width+2][Height+2];
 
         for(int x=0; x<Width+2; x++){
@@ -147,12 +148,13 @@ public class World {
         }
     }
     private void DrawSquare(int x, int y, int brush_size, int el, int heat){
+        if(el==0) heat=0;
         int x_min = Math.max(1, x-(brush_size>>1));
         int x_max = Math.min(this.Width, x-(brush_size>>1)+brush_size);
         int y_min = Math.max(1, y-(brush_size>>1));
         int y_max = Math.min(this.Height, y-(brush_size>>1)+brush_size);
-        for(int i=x_min; i<x_max; i++){
-            for(int j=y_min; j<y_max; j++){
+        for(int i=x_min; i<=x_max; i++){
+            for(int j=y_min; j<=y_max; j++){
                 if(heat!=0){
                     if(world[i][j].element().id() == 0) continue;
                     this.world[i][j].changeTemperature(heat);
@@ -161,19 +163,19 @@ public class World {
                 Element element = getElement(el);
                 if(world[i][j].element().id() == element.id() || (element.id()>0 && world[i][j].element().id()>0)) continue;
                 this.world[i][j].changeElement(element);
-                if(element.id()==0) this.world[i][j].setTemperature(0);
             }
         }
     }
     private void DrawCircle(int x, int y, int brush_size, int el, int heat){
+        if(el==0) heat=0;
         int x_min = Math.max(1, x-(brush_size>>1));
         int x_max = Math.min(this.Width, x-(brush_size>>1)+brush_size);
         int y_min = Math.max(1, y-(brush_size>>1));
         int y_max = Math.min(this.Height, y-(brush_size>>1)+brush_size);
         double r2=(brush_size*brush_size)/4;
         double offset = ((brush_size&1)==1)? 0:0.5;
-        for(int i=x_min; i<x_max; i++){
-            for(int j=y_min; j<y_max; j++){
+        for(int i=x_min; i<=x_max; i++){
+            for(int j=y_min; j<=y_max; j++){
                 if(heat!=0){
                     if(world[i][j].element().id() == 0) continue;
                     double rx, ry;
@@ -190,7 +192,6 @@ public class World {
                 ry = j-y + offset;
                 if(rx*rx+ry*ry>r2) continue;
                 this.world[i][j].changeElement(element);
-                if(element.id()==0) this.world[i][j].setTemperature(0);
             }
         }
     }

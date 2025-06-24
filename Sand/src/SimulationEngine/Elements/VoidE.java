@@ -8,13 +8,13 @@ public class VoidE extends Element {
         e_id = 0;
         name = "Void";
         type = 3;
-        density = 0;
+        density = 0.1f;
         static_object = true;
         inertia_viscosity = 0;
         color = trans(0x000000ff);
-        thermal_conductivity =0;
-        heat_capacity = 0;
-        init_temperature = 0;
+        thermal_conductivity = 1f;
+        heat_capacity = 10f;
+        init_temperature = 25;
         melting_point = 0;
         freezing_point = 0;
         melting_latent = 0;
@@ -33,6 +33,6 @@ public class VoidE extends Element {
 
     @Override
     public void AttributeChange(Cell[][] world, int x, int y) {
-        world[x][y].setReserved(0);
+        world[x][y].setTemperature(25);
     }
 }

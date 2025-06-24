@@ -13,7 +13,7 @@ public class Water extends Liquid {
         density = 100;
         color = trans(colors[new Random().nextInt(3)]);
         inertia_viscosity = 0;
-        thermal_conductivity = 0.6f;
+        thermal_conductivity = 1f;
         heat_capacity = 20;
         init_temperature = 25;
         melting_point = 100;

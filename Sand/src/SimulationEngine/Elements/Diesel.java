@@ -28,7 +28,10 @@ public class Diesel extends Liquid {
     @Override
     public void AttributeChange(Cell[][] world, int x, int y) {
         if(world[x-1][y].element().id()==15 || world[x+1][y].element().id()==15 || world[x][y-1].element().id()==15 || world[x][y+1].element().id()==15){
-            World.UpdateNextElement(x, y, 15);
+            world[x][y].changeTemperature(1200);
+        }
+        if(world[x-1][y].element().id()==21 || world[x+1][y].element().id()==21 || world[x][y-1].element().id()==21 || world[x][y+1].element().id()==21){
+            world[x][y].changeTemperature(500);
         }
     }
 }
