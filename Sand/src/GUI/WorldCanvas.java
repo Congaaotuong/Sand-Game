@@ -3,11 +3,16 @@ package GUI;
 import CustomDataType.*;
 import Sand.Main;
 import SimulationEngine.World;
+import com.mysql.cj.xdevapi.Table;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class WorldCanvas extends Canvas {
     WorldCanvas self = this;
@@ -26,6 +31,7 @@ public class WorldCanvas extends Canvas {
     int ChosenE;
     int heat;
     boolean pause;
+    boolean AbsPause;
     Pair<Integer, Integer> mousePos = new Pair<Integer, Integer>(-1, -1);
     JButton pauseButton = new JButton();
     JButton heatButton = new JButton();
@@ -44,6 +50,7 @@ public class WorldCanvas extends Canvas {
         this.heatmap = false;
         this.ChosenE = LeftE;
         this.pause = false;
+        this.AbsPause = false;
         this.setBackground(Color.BLACK);
         this.setPreferredSize(new Dimension(Width*Length, Height*Length));
         this.addMouseListener(new MouseAdapter() {
@@ -109,8 +116,9 @@ public class WorldCanvas extends Canvas {
         this.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
+                if (AbsPause) return;
                 int code = e.getKeyCode();
-                if (code == 77) {
+                if (code == 27) {
                     Main.RequestScene("main menu");
                 }
                 if(code == 67){
@@ -121,6 +129,9 @@ public class WorldCanvas extends Canvas {
                 }
                 if(code == 72){
                     HeatMap();
+                }
+                if(code == 80){
+                    Setting();
                 }
                 if(code == 49){
                     brush_type = 1;
@@ -178,30 +189,49 @@ public class WorldCanvas extends Canvas {
         repaint();
     }
     public void BrushElement(int x, int heat){
+        if(AbsPause) return;
         LeftE = x;
         this.heat = heat;
     }
     public void Clean(){
+        if(AbsPause) return;
         world.cleanScreen();
         repaint();
     }
     public void BrushType(int x){
+        if(AbsPause) return;
         brush_type=x;
     }
     public void Main(){
+        if(AbsPause) return;
         Main.RequestScene("main menu");
     }
+    public void Setting(){
+        if(AbsPause) return;
+        Main.RequestScene("Setting2");
+    }
     public void Pause(){
+        if(AbsPause) return;
         pause = !pause;
+        if(pause) pauseButton.setLabel("Resume (space)");
+        else pauseButton.setLabel("Pause (space)");
+    }
+    public void AbsPause(boolean bool){
+        AbsPause = bool;
+        pause = bool;
         if(pause) pauseButton.setLabel("Resume (space)");
         else pauseButton.setLabel("Pause (space)");
     }
 
     public void HeatMap(){
+        if(AbsPause) return;
         heatmap = !heatmap;
         if(heatmap) heatButton.setLabel("Normal Map (h)");
         else heatButton.setLabel("Heat Map (h)");
         repaint();
+    }
+    public World getWorld() {
+        return this.world;
     }
 
     void AddCursor(Color[][] grid){
@@ -239,4 +269,11 @@ public class WorldCanvas extends Canvas {
     }
     public void SetPauseButton(JButton button){this.pauseButton = button;}
     public void SetHeatButton(JButton button){this.heatButton = button;}
+    public ArrayList<SavingObject> getData(){
+        return world.getData();
+    }
+    public void loadData(ArrayList<SavingObject> data){
+        world.loadData(data);
+    }
+    public boolean AbsPause(){return this.AbsPause;}
 }

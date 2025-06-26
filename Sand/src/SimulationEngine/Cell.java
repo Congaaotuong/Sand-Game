@@ -1,6 +1,8 @@
 package SimulationEngine;
 
+import CustomDataType.*;
 import SimulationEngine.Elements.*;
+import java.lang.*;
 public class Cell {
     int x_pos;
     int y_pos;
@@ -48,5 +50,18 @@ public class Cell {
         this.direction = 0;
         this.element = new VoidE();
         this.temperature = this.element.init_temperature();
+        this.reserved = 0;
+    }
+    public SavingObject data(){
+        int data=0;
+        data= (data|x_pos);
+        data=((data<<9)|y_pos);
+        data=((data<<3)|direction);
+        data=((data<<1) | ((falling)? 1:0));
+        data=((data<<9)|element.id());
+        int temp = Float.floatToIntBits(temperature);
+        int res = Float.floatToIntBits(reserved);
+        long floating = ((temp<<32)|res);
+        return new SavingObject(data, floating);
     }
 }

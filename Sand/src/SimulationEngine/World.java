@@ -1,11 +1,13 @@
 package SimulationEngine;
 
 import CustomDataType.*;
+import GUI.Loadout;
 import GUI.WorldCanvas;
 import SimulationEngine.Elements.*;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.lang.*;
 
 public class World {
     public World self = this;
@@ -300,5 +302,36 @@ public class World {
             case 22: return new Ash();
         }
         return new VoidE();
+    }
+
+    public ArrayList<SavingObject> getData(){
+        ArrayList<SavingObject> data = new ArrayList<SavingObject>();
+        for(int x=1; x<=Width; x++){
+            for(int y=1;y<=Height; y++){
+                if(world[x][y].element().id()==0) continue;
+                data.add(world[x][y].data());
+            }
+        }
+        return data;
+    }
+    public void loadData(ArrayList<SavingObject> data){
+        cleanScreen();
+        for(SavingObject d : data){
+            int Int = d.getFirst();
+            long Flt = d.getSecond();
+            int id = (Int&511);
+            int fall = (Int>>=9)&1;
+            int dir = (Int>>=1)&7;
+            int y_pos = (Int>>=3)&511;
+            int x_pos = (Int>>9)&511;
+            int res = (int)Flt;
+            int temp = (int)(Flt>>>32);
+
+            world[x_pos][y_pos].changeDirection(dir);
+            world[x_pos][y_pos].changeFalling(fall==1);
+            world[x_pos][y_pos].changeElementS(getElement(id));
+            world[x_pos][y_pos].setTemperature(Float.intBitsToFloat(temp));
+            world[x_pos][y_pos].setReserved(Float.intBitsToFloat(res));
+        }
     }
 }

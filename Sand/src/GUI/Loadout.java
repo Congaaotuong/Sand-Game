@@ -24,19 +24,111 @@ public class Loadout {
                 canvas.SetMiddle(panel.getWidth(), panel.getHeight());
             }
         });
-        return panel;
-    }
-    public Holder loadout_2(String name){
-        Holder panel = new Holder(name);
-        panel.setBackground(Color.BLUE);
-        Button button = new Button("change scene");
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Main.RequestScene("world");
+        panel.setFocusable(true);
+        panel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                panel.requestFocus();
             }
         });
-        panel.add(button);
+        panel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                int code = e.getKeyCode();
+                if(code == 27){
+                    Main.RequestScene("main menu");
+                }
+                if(code == 67){
+                    canvas.Clean();
+                }
+                if (code == 32) {
+                    canvas.Pause();
+                }
+                if(code == 72){
+                    canvas.HeatMap();
+                }
+                if(code == 80){
+                    canvas.Setting();
+                }
+                if(code == 49){
+                    canvas.BrushType(1);
+                }
+                if(code == 50){
+                    canvas.BrushType(0);
+                }
+            }
+        });
+        JButton saveToBtn = new JButton("Save");
+        saveToBtn.setBounds(1320, 728, 100, 50);
+        saveToBtn.setBackground(new Color(51, 51, 51, 255));
+        saveToBtn.setForeground(Color.WHITE);
+        saveToBtn.setFont(new Font("Comic Sans MS", Font.BOLD, 11));
+        saveToBtn.setBorder(new LineBorder(Color.WHITE, 3));
+        saveToBtn.addActionListener(e -> {
+            if(canvas.AbsPause()) return;
+            SaveLoadOverlayPanel savePanel = new SaveLoadOverlayPanel(panel, canvas, true, null);
+            panel.add(savePanel, 0);
+            panel.repaint();
+            panel.revalidate();
+        });
+        panel.add(saveToBtn);
+
+// Nút Load to
+        JButton loadToBtn = new JButton("Load");
+        loadToBtn.setBounds(1430, 728, 100, 50);
+        loadToBtn.setBackground(new Color(51, 51, 51, 255));
+        loadToBtn.setForeground(Color.WHITE);
+        loadToBtn.setFont(new Font("Comic Sans MS", Font.BOLD, 11));
+        loadToBtn.setBorder(new LineBorder(Color.WHITE, 3));
+        loadToBtn.addActionListener(e -> {
+            if(canvas.AbsPause()) return;
+            final SaveLoadOverlayPanel[] loadPanel = new SaveLoadOverlayPanel[1];
+            loadPanel[0] = new SaveLoadOverlayPanel(panel, canvas, false, loadedWorld -> {
+                canvas.loadData(loadedWorld);
+                canvas.repaint();
+                panel.remove(loadPanel[0]);
+                panel.repaint();
+                panel.revalidate();
+            });
+            panel.add(loadPanel[0], 0);
+            panel.repaint();
+            panel.revalidate();
+        });
+        panel.add(loadToBtn);
+
+        return panel;
+    }
+    public Holder loadout_HomeGame(String name, int width, int height, int length) {
+        Holder panel = new Holder(name);
+        panel.setSize(new Dimension(width * length, height * length));
+        panel.setLayout(new BorderLayout());
+        MainMenu gameMenuPanel = new MainMenu();
+        panel.add(gameMenuPanel, BorderLayout.CENTER);
+        return panel;
+    }
+
+    public Holder loadout_Login(String name, int width, int height, int length) {
+        Holder panel = new Holder(name);
+        panel.setLayout(new BorderLayout());
+        panel.setPreferredSize(new Dimension(width * length, height * length));
+        Login gameLoginPanel = new Login();
+        panel.add(gameLoginPanel, BorderLayout.CENTER);
+        return panel;
+    }
+    public Holder loadout_Database(String name, int width, int height, int length) {
+
+        Holder panel = new Holder(name);
+        panel.setLayout(new BorderLayout());
+        panel.setPreferredSize(new Dimension(width * length, height * length));
+        SaveLoadDatabase gameDatabasePanel = new SaveLoadDatabase();
+        panel.add(gameDatabasePanel, BorderLayout.CENTER);
+        return panel;
+    }
+    public Holder loadout_Setting(String name, int width, int height, int length, String target) {
+        Holder panel = new Holder(name);
+        panel.setLayout(new BorderLayout());
+        panel.setPreferredSize(new Dimension(width * length, height * length));
+        Setting st=new Setting(target);
+        panel.add(st, BorderLayout.CENTER);
         return panel;
     }
 
@@ -110,6 +202,13 @@ public class Loadout {
                 }
             });
         }
+        if(type==6){
+            custom.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    canvas.Setting();}
+            });
+        }
         return custom;
     }
 
@@ -162,7 +261,7 @@ public class Loadout {
         panel.add(b24);
         JButton clear = getButton("Clear (c)", canvas, 0, 1430, 20, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(clear);
-        JButton main = getButton("Main menu (m)", canvas, 1, 1430, 788, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
+        JButton main = getButton("Main menu (esc)", canvas, 1, 1430, 788, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(main);
         JButton pause = getButton("Pause (space)", canvas, 2, 1310, 20, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(pause);
@@ -174,5 +273,7 @@ public class Loadout {
         JButton HeatMap = getButton("Heat Map (h)", canvas, 5, 1430, 140, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(HeatMap);
         canvas.SetHeatButton(HeatMap);
+        JButton setting = getButton("Info (p)", canvas, 6, 1320, 788, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
+        panel.add(setting);
     }
 }

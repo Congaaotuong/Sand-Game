@@ -11,11 +11,11 @@ public class Wood extends Solid {
     public Wood(){
         e_id = 20;
         name = "Wood";
-        density = 50;
+        density = 150;
         static_object = true;
         color = trans(colors[new Random().nextInt(5)]);
         inertia_viscosity = 0;
-        thermal_conductivity = 4f;
+        thermal_conductivity = 3.2f;
         heat_capacity = 8.1f;
         init_temperature = 25;
         melting_point = 500;

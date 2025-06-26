@@ -7,7 +7,7 @@ public class Holder extends Panel {
     TheFunction func;
     public Holder(String Name){
         this.Name = Name;
-        func = ()->{System.out.println("executed!");};
+        func = ()->{};
     }
     public String Name(){return this.Name;}
     public void changeTheFunction(TheFunction func){this.func = func;}
