@@ -63,6 +63,7 @@ public abstract class Gas extends Element {
         for(int i=0; i<6; i++){
             if(dir[i]==min) direction.add(i);
         }
+        direction = Shuffle(direction);
         return direction.get(new Random().nextInt(direction.size()));
     }
 }

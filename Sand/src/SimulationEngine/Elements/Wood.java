@@ -28,8 +28,6 @@ public class Wood extends Solid {
 
     @Override
     public void AttributeChange(Cell[][] world, int x, int y) {
-        if(world[x-1][y].element().id()==21 || world[x+1][y].element().id()==21 || world[x][y-1].element().id()==21 || world[x][y+1].element().id()==21){
-            world[x][y].changeTemperature(new Random().nextInt(0, 51));
-        }
+        if(world[x][y].temperature()>=400) world[x][y].changeElementS(new Charcoal());
     }
 }

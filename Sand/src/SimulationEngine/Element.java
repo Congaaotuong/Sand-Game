@@ -3,6 +3,7 @@ package SimulationEngine;
 import SimulationEngine.Elements.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 public abstract class Element {
     protected int e_id;
@@ -50,7 +51,7 @@ public abstract class Element {
     public abstract void AttributeChange(Cell[][] world, int x, int y);
     public void HeatTransfer(Cell[][] world, int x, int y){
         if(world[x][y].element().thermal_conductivity()<=0) return;
-        float mul=10f;
+        float mul=5f;
 
         float self = world[x][y].temperature();
         float l = world[x-1][y].temperature();
@@ -75,11 +76,6 @@ public abstract class Element {
         float dr = world[x+1][y].element().density();
         float du = world[x][y-1].element().density();
         float dd = world[x][y+1].element().density();
-
-        if(l>=self) cl=0;
-        if(r>=self) cr=0;
-        if(u>=self) cu=0;
-        if(d>=self) cd=0;
 
         float t = (ds*self*cs+dl*l*cl+dr*r*cr+du*u*cu+dd*d*cd) / (ds*cs+dl*cl+dr*cr+du*cu+dd*cd);
 
@@ -158,7 +154,7 @@ public abstract class Element {
             case 4: return new Clay();
             case 5: return new Water();
             case 6: return new Magma();
-            case 7: return new Diesel();
+            case 7: return new Gasoline();
             case 8: return new Steam();
             case 9: return new Terracotta();
             case 10: return new MoltenGlass();
@@ -172,9 +168,26 @@ public abstract class Element {
             case 18: return new MoltenCopper();
             case 19: return new RustedCopper();
             case 20: return new Wood();
-            case 21: return new BurningWood();
+            case 21: return new BurningCoal();
             case 22: return new Ash();
+            case 23: return new FlammableGas();
+            case 24: return new AbsoluteInsulator();
+            case 25: return new Steel();
+            case 26: return new Charcoal();
+            case 27: return new AshDust();
         }
         return new VoidE();
+    }
+
+    protected ArrayList<Integer> Shuffle(ArrayList<Integer> arr){
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        int size = arr.size();
+        Random rand = new Random();
+        for(int s=size; s>0; s--){
+            int idx = rand.nextInt(s);
+            ans.add(arr.get(idx));
+            arr.remove(idx);
+        }
+        return ans;
     }
 }

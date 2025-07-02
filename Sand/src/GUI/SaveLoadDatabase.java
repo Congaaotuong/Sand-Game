@@ -89,12 +89,12 @@ public class SaveLoadDatabase extends JPanel {
             String name = "Slot " + slot + (file.exists() ? " (Saved)" : " (Empty)");
             Color color;
             if(file.exists()){
-                color = new Color(46, 104, 13);
+                color = new Color(66, 124, 33);
             }
             else{
-                color = new Color(89, 95, 99);
+                color = new Color(109, 115, 119);
             }
-            JButton btn = getButton(name, color, 16, 50, 20 + i * 70, 400, 50);
+            JButton btn = getButton(name, new Color(60, 60, 60), color,16, 50, 20 + i * 70, 400, 50);
             btn.addActionListener(e -> {
                 target=slot;
                 text.setText(Main.connectionInfo()+slot_text());
@@ -108,10 +108,10 @@ public class SaveLoadDatabase extends JPanel {
         button_panel.setLayout(null);
         button_panel.setBounds(0, 550, 500, 150);
         button_panel.setBackground(Color.BLACK);
-        JButton back = getButton("Back", Color.DARK_GRAY, 25,200, 90, 100, 50);
+        JButton back = getButton("Back", Color.DARK_GRAY, Color.GRAY, 25,200, 90, 100, 50);
         back.addActionListener(e -> Main.RequestScene("main menu"));
         button_panel.add(back);
-        JButton delete = getButton("Delete", new Color(180, 20, 100), 25, 200, 20, 100, 50);
+        JButton delete = getButton("Delete", new Color(180, 20, 100), new Color(240, 80, 160), 25, 200, 20, 100, 50);
         delete.addActionListener(e -> {
             File file = new File(getFileName(target));
             if(!file.exists()) {
@@ -122,14 +122,13 @@ public class SaveLoadDatabase extends JPanel {
                 JOptionPane.showMessageDialog(content, "Delete successfully!");
                 String name = "Slot " + target + " (Empty)";
                 btns[target-1].setLabel(name);
-                btns[target-1].setForeground(new Color(89, 95, 99));
-                btns[target-1].setBackground(new Color(149, 155, 159));
+                btns[target-1].setBackground(new Color(109, 115, 119));
             } else {
                 JOptionPane.showMessageDialog(content, "Delete failed!");
             }
         });
         button_panel.add(delete);
-        JButton save = getButton("Save", new Color(100, 180, 20), 25, 50, 20, 100, 50);
+        JButton save = getButton("Save", new Color(100, 180, 20), new Color(160, 240, 80), 25, 50, 20, 100, 50);
         save.addActionListener(e -> {
             File file = new File(getFileName(target));
             if(!file.exists()) {
@@ -146,19 +145,18 @@ public class SaveLoadDatabase extends JPanel {
             }
         });
         button_panel.add(save);
-        JButton load = getButton("Load", new Color(100, 20, 180), 25, 350, 20, 100, 50);
+        JButton load = getButton("Load", new Color(100, 20, 180), new Color(160, 80, 240), 25, 350, 20, 100, 50);
         load.addActionListener(e -> {
             try {
-                if (!new File("saves").exists()) new File("saves").mkdirs();
-                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(getFileName(target)));
                 ArrayList<SavingObject> loaded = Main.Load(content, table.getText());
                 if(loaded.size()==0) return;
+                if (!new File("saves").exists()) new File("saves").mkdirs();
+                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(getFileName(target)));
                 System.out.println(loaded.size());
                 oos.writeObject(loaded);
                 oos.close();
                 btns[target-1].setText("Slot " + target + " (Saved)");
-                btns[target-1].setBackground(new Color(106, 164, 73));
-                btns[target-1].setForeground(new Color(46, 104, 13));
+                btns[target-1].setBackground(new Color(66, 124, 33));
                 JOptionPane.showMessageDialog(content, "loaded to slot " + target);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(content, "Loading error: " + ex.getMessage());
@@ -182,30 +180,23 @@ public class SaveLoadDatabase extends JPanel {
                     String name = "Slot " + slot + (file.exists() ? " (Saved)" : " (Empty)");
                     btns[i].setLabel(name);
                     if(file.exists()){
-                        btns[i].setForeground(new Color(46, 104, 13));
-                        btns[i].setBackground(new Color(106, 164, 73));
+                        btns[i].setBackground(new Color(66, 124, 33));
                     }
                     else{
-                        btns[i].setForeground(new Color(89, 95, 99));
-                        btns[i].setBackground(new Color(149, 155, 159));
+                        btns[i].setBackground(new Color(109, 115, 119));
                     }
                 }
             }
         });
         add(content);
     }
-    JButton getButton(String name, Color color, int size, int x, int y, int width, int height){
+    JButton getButton(String name, Color color1, Color color2, int size, int x, int y, int width, int height){
         JButton button = new JButton(name);
         button.setBounds(x, y, width, height);
         button.setFont(new Font("Comic Sans MS", Font.BOLD, size));
-        button.setBorder(new LineBorder(color, 3));
-        button.setForeground(color);
-        Color lightColor = new Color(
-                Math.min(color.getRed() + 60, 255),
-                Math.min(color.getGreen() + 60, 255),
-                Math.min(color.getBlue() + 60, 255)
-        );
-        button.setBackground(lightColor);
+        button.setBorder(new LineBorder(color1, 3));
+        button.setForeground(color1);
+        button.setBackground(color2);
         return button;
     }
     String slot_text(){

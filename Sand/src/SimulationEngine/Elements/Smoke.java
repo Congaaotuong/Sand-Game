@@ -31,7 +31,6 @@ public class Smoke extends Gas {
         world[x][y].setTemperature(init_temperature);
         step++;
         Random random= new Random();
-        if(world[x-1][y].element().type()<=0||world[x+1][y].element().type()<=0||world[x][y-1].element().type()<=0||world[x][y+1].element().type()<=0) step=101;
         if(step>100) {
             if(random.nextInt(10)!=2) return;
             world[x][y].changeElement(new VoidE());

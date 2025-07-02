@@ -16,7 +16,7 @@ public class Main {
     static int length=2;
     static FrameController wnd = new FrameController("Sand", "D:\\Java\\Sand\\Images\\images.jpg", true, width*length, height*length);
     static Loadout loadout = new Loadout();
-    static MySQLConnection connection = new MySQLConnection();
+    static MySQLConnection connection = new MySQLConnection();  
 
     public static void main(String[] args) {
         Start();

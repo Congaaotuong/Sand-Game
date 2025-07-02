@@ -12,11 +12,11 @@ public class Fire extends Gas {
         e_id = 15;
         name = "Fire";
         type = 3;
-        density = 1f;
+        density = 15f;
         inertia_viscosity = 0;
         color = trans(colors[new Random().nextInt(5)]);
         thermal_conductivity = 1f;
-        heat_capacity = 1000f;
+        heat_capacity = 100f;
         init_temperature = 1200;
         melting_point = 1000;
         melting_latent = 0;
@@ -31,7 +31,7 @@ public class Fire extends Gas {
         world[x][y].setTemperature(init_temperature);
         step++;
         Random random= new Random();
-        if(step>5) {
+        if(step>10) {
             if(random.nextInt(5)!=2) return;
             world[x][y].changeElement(new Smoke());
         }

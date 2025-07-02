@@ -15,7 +15,7 @@ public class Magma extends Liquid {
         inertia_viscosity = 10;
         thermal_conductivity = 1.5f;
         heat_capacity = 7;
-        init_temperature = 800;
+        init_temperature = 600;
         melting_point = 1000;
         melting_latent = 0;
         freezing_point = 500;

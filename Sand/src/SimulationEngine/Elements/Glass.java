@@ -6,7 +6,7 @@ import SimulationEngine.SubElements.Solid;
 import java.util.Random;
 
 public class Glass extends Solid {
-    long[] colors = {0xdbe1e3ff, 0xc0cbcdff, 0xd8e4e9ff,0xdbe1e3ff, 0xc0cbcdff, 0xd8e4e9ff, 0xa7c7cbff};
+    long[] colors = {0xdbe1e3ff, 0xd8e4e9ff, 0xdbe1e3ff, 0xd8e4e9ff, 0xdbe1e3ff, 0xd8e4e9ff, 0xc0cbcdff};
     public Glass(){
         e_id = 11;
         name = "Glass";

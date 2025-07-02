@@ -14,7 +14,7 @@ public class Bedrock extends Solid {
         static_object = true;
         color = trans(colors[new Random().nextInt(5)]);
         inertia_viscosity = 0;
-        thermal_conductivity = 4;
+        thermal_conductivity = 2;
         heat_capacity = 3.8f;
         init_temperature = 25;
         melting_point = 500;

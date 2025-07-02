@@ -1,8 +1,6 @@
 package SimulationEngine;
 
 import CustomDataType.*;
-import GUI.Loadout;
-import GUI.WorldCanvas;
 import SimulationEngine.Elements.*;
 
 import java.awt.*;
@@ -32,20 +30,16 @@ public class World {
         for(int x=0; x<Width+2; x++){
             for(int y=0; y<Height+2; y++){
                 this.world[x][y] = new Cell(x, y);;
-                this.nextEl[x][y] = -1;
+                this.nextEl[x][y] = 0;
             }
         }
         for(int i=0; i<Width+2; i++){
-            this.world[i][0].changeElement(new Bedrock());
-            this.world[i][Height+1].changeElement(new Bedrock());
-            this.world[i][0].setTemperature(10000);
-            this.world[i][Height+1].setTemperature(10000);
+            this.world[i][0].changeElement(new AbsoluteInsulator());
+            this.world[i][Height+1].changeElement(new AbsoluteInsulator());
         }
         for(int i=0; i<Height+2; i++){
-            this.world[0][i].changeElement(new Bedrock());
-            this.world[Width+1][i].changeElement(new Bedrock());
-            this.world[0][i].setTemperature(10000);
-            this.world[Width+1][i].setTemperature(10000);
+            this.world[0][i].changeElement(new AbsoluteInsulator());
+            this.world[Width+1][i].changeElement(new AbsoluteInsulator());
         }
     }
     public int Width(){return this.Width;}
@@ -209,13 +203,7 @@ public class World {
         }
     }
     public void UpdateWorld(){
-        for(int x=1; x<=Width; x++){
-            for(int y=1; y<=Height; y++){
-                if(nextEl[x][y]==-1) continue;
-                world[x][y].changeElement(getElement(nextEl[x][y]));
-                nextEl[x][y] = -1;
-            }
-        }
+
         for(int x=1; x<=Width; x++){
             for(int y=1; y<=Height; y++){
                 world[x][y].element().HeatTransfer(world, x, y);
@@ -225,6 +213,13 @@ public class World {
             for(int y=1; y<=Height; y++){
                 world[x][y].element().ApplyHeat(world, x, y);
                 world[x][y].element().AttributeChange(world, x, y);
+            }
+        }
+        for(int x=1; x<=Width; x++){
+            for(int y=1; y<=Height; y++){
+                if(nextEl[x][y]==0) continue;
+                world[x][y].changeElement(getElement(nextEl[x][y]));
+                nextEl[x][y] = 0;
             }
         }
         for(int y=Height; y>=1; y--){
@@ -284,7 +279,7 @@ public class World {
             case 4: return new Clay();
             case 5: return new Water();
             case 6: return new Magma();
-            case 7: return new Diesel();
+            case 7: return new Gasoline();
             case 8: return new Steam();
             case 9: return new Terracotta();
             case 10: return new MoltenGlass();
@@ -298,8 +293,13 @@ public class World {
             case 18: return new MoltenCopper();
             case 19: return new RustedCopper();
             case 20: return new Wood();
-            case 21: return new BurningWood();
+            case 21: return new BurningCoal();
             case 22: return new Ash();
+            case 23: return new FlammableGas();
+            case 24: return new AbsoluteInsulator();
+            case 25: return new Steel();
+            case 26: return new Charcoal();
+            case 27: return new AshDust();
         }
         return new VoidE();
     }

@@ -225,7 +225,7 @@ public class Loadout {
         panel.add(b5);
         JButton b6 = getBrushButton("Magma", canvas, 6, 0, 10, 270, 100, 40, new Color(64, 11, 11, 255), new Color(255, 219, 0, 255));
         panel.add(b6);
-        JButton b7 = getBrushButton("Diesel", canvas, 7, 0, 10, 320, 100, 40, new Color(166, 2, 35, 255), new Color(247, 99, 129, 255));
+        JButton b7 = getBrushButton("Gasoline", canvas, 7, 0, 10, 320, 100, 40, new Color(16,112,80, 255), new Color(199,246,236, 255));
         panel.add(b7);
         JButton b8 = getBrushButton("Steam", canvas, 8,0, 10, 370, 100, 40, new Color(79, 168, 176, 255), new Color(226, 228, 225, 255));
         panel.add(b8);
@@ -259,6 +259,14 @@ public class Loadout {
         panel.add(b23);
         JButton b24 = getBrushButton("Ash", canvas, 22, 0, 120, 220, 100, 40, new Color(59, 53, 53, 255), new Color(159, 147, 147, 255));
         panel.add(b24);
+        JButton b25 = getBrushButton("Flammable Gas", canvas, 23, 0, 120, 270, 100, 40, new Color(36, 35, 36, 255), new Color(148, 145, 148, 255));
+        panel.add(b25);
+        JButton b26 = getBrushButton("Absolute Insulator", canvas, 24, 0, 120, 320, 100, 40, new Color(185,188,63, 255), new Color(244,249,255, 255));
+        panel.add(b26);
+        JButton b27 = getBrushButton("Steel", canvas, 25, 0, 120, 370, 100, 40, new Color(153,163,163, 255), new Color(224,229,229, 255));
+        panel.add(b27);
+        JButton b28 = getBrushButton("Charcoal", canvas, 26, 0, 120, 420, 100, 40, new Color(34,17,5, 255), new Color(109,94,76, 255));
+        panel.add(b28);
         JButton clear = getButton("Clear (c)", canvas, 0, 1430, 20, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
         panel.add(clear);
         JButton main = getButton("Main menu (esc)", canvas, 1, 1430, 788, 100, 50, Color.WHITE, new Color(51, 51, 51, 255));
